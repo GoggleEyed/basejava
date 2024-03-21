@@ -1,7 +1,11 @@
+package com.goggleeyed.webapp.storage;
+
+import com.goggleeyed.webapp.model.Resume;
+
 import java.util.Arrays;
 
 /**
- * Array based storage for Resumes
+ * Array based com.goggleeyed.webapp.storage for Resumes
  */
 public class ArrayStorage {
     private Resume[] storage = new Resume[10000];
@@ -23,7 +27,7 @@ public class ArrayStorage {
 
     public void save(Resume r) {
         if (size >= storage.length) {
-            throw new ArrayIndexOutOfBoundsException("Array storage is full");
+            throw new ArrayIndexOutOfBoundsException("Array com.goggleeyed.webapp.storage is full");
         }
         storage[size] = r;
         size++;
@@ -50,7 +54,7 @@ public class ArrayStorage {
     }
 
     /**
-     * @return array, contains only Resumes in storage (without null)
+     * @return array, contains only Resumes in com.goggleeyed.webapp.storage (without null)
      */
     public Resume[] getAll() {
         return Arrays.copyOf(storage, size);

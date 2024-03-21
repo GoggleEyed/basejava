@@ -1,3 +1,5 @@
+package com.goggleeyed.webapp.model;
+
 /**
  * Initial resume class
  */

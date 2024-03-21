@@ -1,5 +1,10 @@
+package com.goggleeyed.webapp;
+
+import com.goggleeyed.webapp.model.Resume;
+import com.goggleeyed.webapp.storage.ArrayStorage;
+
 /**
- * Test for your ArrayStorage implementation
+ * Test for your com.goggleeyed.webapp.storage.ArrayStorage implementation
  */
 public class MainTestArrayStorage {
     static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();

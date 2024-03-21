@@ -1,9 +1,14 @@
+package com.goggleeyed.webapp;
+
+import com.goggleeyed.webapp.model.Resume;
+import com.goggleeyed.webapp.storage.ArrayStorage;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Interactive test for ArrayStorage implementation
+ * Interactive test for com.goggleeyed.webapp.storage.ArrayStorage implementation
  * (just run, no need to understand)
  */
 public class MainArray {
