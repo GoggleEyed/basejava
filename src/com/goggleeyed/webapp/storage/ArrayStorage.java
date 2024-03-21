@@ -5,7 +5,7 @@ import com.goggleeyed.webapp.model.Resume;
 import java.util.Arrays;
 
 /**
- * Array based com.goggleeyed.webapp.storage for Resumes
+ * Array based storage for Resumes
  */
 public class ArrayStorage {
     private Resume[] storage = new Resume[10000];
@@ -17,44 +17,53 @@ public class ArrayStorage {
     }
 
     public void update(Resume r) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].getUuid().equals(r.getUuid())) {
-                storage[i] = r;
-                break;
-            }
+        int index = indexOf(r.getUuid());
+        if (index == -1) {
+            System.out.println("Error: Resume with this uuid not exist");
+            return;
         }
+
+        storage[index] = r;
     }
 
     public void save(Resume r) {
         if (size >= storage.length) {
-            throw new ArrayIndexOutOfBoundsException("Array com.goggleeyed.webapp.storage is full");
+            System.out.println("Error: Storage overflow");
+            return;
         }
+        if (indexOf(r.getUuid()) != -1) {
+            System.out.println("Error: Resume with this uuid already exist");
+            return;
+        }
+
         storage[size] = r;
         size++;
     }
 
     public Resume get(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].getUuid().equals(uuid)) {
-                return storage[i];
-            }
+        int index = indexOf(uuid);
+        if (index == -1) {
+            System.out.println("Error: Resume with this uuid not exist");
+            return null;
         }
-        return null;
+
+        return storage[index];
     }
 
     public void delete(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].getUuid().equals(uuid)) {
-                storage[i] = storage[size - 1];
-                storage[size - 1] = null;
-                size--;
-                break;
-            }
+        int index = indexOf(uuid);
+        if (index == -1) {
+            System.out.println("Error: Resume with this uuid not exist");
+            return;
         }
+
+        storage[index] = storage[size - 1];
+        storage[size - 1] = null;
+        size--;
     }
 
     /**
-     * @return array, contains only Resumes in com.goggleeyed.webapp.storage (without null)
+     * @return array, contains only Resumes in storage (without null)
      */
     public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
@@ -62,5 +71,14 @@ public class ArrayStorage {
 
     public int size() {
         return size;
+    }
+
+    private int indexOf(String uuid) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].getUuid().equals(uuid)) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

@@ -4,7 +4,7 @@ import com.goggleeyed.webapp.model.Resume;
 import com.goggleeyed.webapp.storage.ArrayStorage;
 
 /**
- * Test for your com.goggleeyed.webapp.storage.ArrayStorage implementation
+ * Test for your ArrayStorage implementation
  */
 public class MainTestArrayStorage {
     static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
