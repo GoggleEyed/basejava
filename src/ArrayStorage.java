@@ -12,6 +12,15 @@ public class ArrayStorage {
         size = 0;
     }
 
+    public void update(Resume r) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(r.uuid)) {
+                storage[i] = r;
+                break;
+            }
+        }
+    }
+
     public void save(Resume r) {
         if (size >= storage.length) {
             throw new ArrayIndexOutOfBoundsException("Array storage is full");
