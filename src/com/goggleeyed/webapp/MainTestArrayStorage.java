@@ -2,12 +2,13 @@ package com.goggleeyed.webapp;
 
 import com.goggleeyed.webapp.model.Resume;
 import com.goggleeyed.webapp.storage.ArrayStorage;
+import com.goggleeyed.webapp.storage.Storage;
 
 /**
  * Test for your ArrayStorage implementation
  */
 public class MainTestArrayStorage {
-    private static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
+    private static final Storage ARRAY_STORAGE = new ArrayStorage();
 
     public static void main(String[] args) {
         final Resume r1 = new Resume();
