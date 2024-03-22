@@ -19,7 +19,7 @@ public class ArrayStorage {
     public void update(Resume r) {
         int index = indexOf(r.getUuid());
         if (index == -1) {
-            System.out.println("Error: Resume with this uuid not exist");
+            System.out.println("Error: Resume " + r.getUuid() + " not exist");
             return;
         }
 
@@ -32,7 +32,7 @@ public class ArrayStorage {
             return;
         }
         if (indexOf(r.getUuid()) != -1) {
-            System.out.println("Error: Resume with this uuid already exist");
+            System.out.println("Error: Resume " + r.getUuid() + " already exist");
             return;
         }
 
@@ -43,7 +43,7 @@ public class ArrayStorage {
     public Resume get(String uuid) {
         int index = indexOf(uuid);
         if (index == -1) {
-            System.out.println("Error: Resume with this uuid not exist");
+            System.out.println("Error: Resume  " + uuid + "  not exist");
             return null;
         }
 
@@ -53,7 +53,7 @@ public class ArrayStorage {
     public void delete(String uuid) {
         int index = indexOf(uuid);
         if (index == -1) {
-            System.out.println("Error: Resume with this uuid not exist");
+            System.out.println("Error: Resume  " + uuid + "  not exist");
             return;
         }
 
