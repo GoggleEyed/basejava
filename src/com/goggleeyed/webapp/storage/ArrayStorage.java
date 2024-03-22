@@ -2,61 +2,12 @@ package com.goggleeyed.webapp.storage;
 
 import com.goggleeyed.webapp.model.Resume;
 
-import java.util.Arrays;
-
 /**
  * Array based storage for Resumes
  */
 public class ArrayStorage extends AbstractArrayStorage {
 
-    public void clear() {
-        Arrays.fill(storage, 0, size, null);
-        size = 0;
-    }
-
-    public void update(Resume r) {
-        int index = indexOf(r.getUuid());
-        if (index == -1) {
-            System.out.println("Error: Resume " + r.getUuid() + " not exist");
-            return;
-        }
-
-        storage[index] = r;
-    }
-
-    public void save(Resume r) {
-        if (size >= STORAGE_LIMIT) {
-            System.out.println("Error: Storage overflow");
-            return;
-        }
-        if (indexOf(r.getUuid()) != -1) {
-            System.out.println("Error: Resume " + r.getUuid() + " already exist");
-            return;
-        }
-
-        storage[size] = r;
-        size++;
-    }
-
-    public void delete(String uuid) {
-        int index = indexOf(uuid);
-        if (index == -1) {
-            System.out.println("Error: Resume  " + uuid + "  not exist");
-            return;
-        }
-
-        storage[index] = storage[size - 1];
-        storage[size - 1] = null;
-        size--;
-    }
-
-    /**
-     * @return array, contains only Resumes in storage (without null)
-     */
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
-    }
-
+    @Override
     protected int indexOf(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
@@ -64,5 +15,15 @@ public class ArrayStorage extends AbstractArrayStorage {
             }
         }
         return -1;
+    }
+
+    @Override
+    protected void insertElement(Resume r, int index) {
+        storage[size] = r;
+    }
+
+    @Override
+    protected void fillDeletedElement(int index) {
+        storage[index] = storage[size - 1];
     }
 }
