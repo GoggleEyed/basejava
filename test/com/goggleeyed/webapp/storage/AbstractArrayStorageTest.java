@@ -58,7 +58,7 @@ public abstract class AbstractArrayStorageTest {
                     storage.save(new Resume("uuid" + i));
                 }
             } catch (StorageException e) {
-                Assertions.fail();
+                Assertions.fail("Exception is thrown before overflowing");
             }
             storage.save(new Resume("dummy"));
         });
