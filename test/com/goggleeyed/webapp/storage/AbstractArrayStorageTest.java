@@ -44,10 +44,10 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void save() {
-        Resume resume_dummy = new Resume("dummy");
-        storage.save(resume_dummy);
+        Resume resume_4 = new Resume("uuid4");
+        storage.save(resume_4);
         assertSize(4);
-        assertGet(resume_dummy);
+        assertGet(resume_4);
     }
 
     @Test
