@@ -2,11 +2,11 @@ package com.goggleeyed.webapp.storage;
 
 import com.goggleeyed.webapp.model.Resume;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public class ListStorage extends AbstractStorage {
-    List<Resume> storage = new ArrayList<>();
+public class MapStorage extends AbstractStorage {
+    Map<String, Resume> storage = new HashMap<>();
 
     @Override
     public int size() {
@@ -20,42 +20,37 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     public Resume[] getAll() {
-        return storage.toArray(new Resume[0]);
+        return storage.values().toArray(new Resume[0]);
     }
 
 
     @Override
-    protected Integer getSearchKey(String uuid) {
-        for (int i = 0; i < storage.size(); i++) {
-            if (storage.get(i).getUuid().equals(uuid)) {
-                return i;
-            }
-        }
-        return -1;
+    protected String getSearchKey(String uuid) {
+        return uuid;
     }
 
     @Override
     protected void doSave(Resume r, Object searchKey) {
-        storage.add(r);
+        storage.put((String) searchKey, r);
     }
 
     @Override
     protected void doDelete(Object searchKey) {
-        storage.remove(((Integer) searchKey).intValue());
+        storage.remove((String) searchKey);
     }
 
     @Override
     protected void doUpdate(Resume r, Object searchKey) {
-        storage.set((Integer) searchKey, r);
+        storage.put((String) searchKey, r);
     }
 
     @Override
     protected Resume doGet(Object searchKey) {
-        return storage.get((Integer) searchKey);
+        return storage.get((String) searchKey);
     }
 
     @Override
     protected boolean isExist(Object searchKey) {
-        return ((Integer) searchKey) >= 0;
+        return storage.containsKey((String) searchKey);
     }
 }
