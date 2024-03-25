@@ -16,12 +16,12 @@ public abstract class AbstractArrayStorageTest extends AbstractStorageTest {
         StorageException exception = Assertions.assertThrows(StorageException.class, () -> {
             try {
                 for (int i = 4; i <= AbstractArrayStorage.STORAGE_LIMIT; i++) {
-                    storage.save(new Resume("uuid" + i));
+                    storage.save(new Resume("uuid" + i, "name" + i));
                 }
             } catch (StorageException e) {
                 Assertions.fail("Exception is thrown before overflowing");
             }
-            storage.save(new Resume("dummy"));
+            storage.save(new Resume("dummy", "dummy"));
         });
         Assertions.assertEquals("Storage overflow", exception.getMessage());
     }

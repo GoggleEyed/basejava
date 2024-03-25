@@ -11,6 +11,8 @@ import java.util.List;
 
 public abstract class AbstractStorage implements Storage {
 
+    private static final Comparator<Resume> RESUME_COMPARATOR = Comparator.comparing(Resume::getFullName).thenComparing(Resume::getUuid);
+
     @Override
     public void save(Resume r) {
         Object searchKey = getNotExistingSearchKey(r.getUuid());
@@ -38,7 +40,7 @@ public abstract class AbstractStorage implements Storage {
     @Override
     public List<Resume> getAllSorted() {
         List<Resume> resumes = new ArrayList<>(doGetAll());
-        resumes.sort(Comparator.comparing(Resume::getFullName).thenComparing(Resume::getUuid));
+        resumes.sort(RESUME_COMPARATOR);
         return resumes;
     }
 

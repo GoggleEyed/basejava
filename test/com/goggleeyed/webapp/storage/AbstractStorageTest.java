@@ -48,7 +48,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void save() {
-        Resume resume_4 = new Resume("uuid4");
+        Resume resume_4 = new Resume("uuid4", "name4");
         storage.save(resume_4);
         assertSize(4);
         assertGet(resume_4);
@@ -56,7 +56,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void saveExist() {
-        Assertions.assertThrows(ExistStorageException.class, () -> storage.save(new Resume(UUID_1)));
+        Assertions.assertThrows(ExistStorageException.class, () -> storage.save(new Resume(UUID_1, "dummy")));
     }
 
     @Test
@@ -73,7 +73,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void update() {
-        Resume new_resume_1 = new Resume(UUID_1);
+        Resume new_resume_1 = new Resume(UUID_1, "new name");
         storage.update(new_resume_1);
         assertGet(new_resume_1);
     }
