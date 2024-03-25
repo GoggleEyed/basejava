@@ -1,8 +1,8 @@
 package com.goggleeyed.webapp.storage;
 
-class MapUuidStorageTest extends AbstractStorageTest {
+public class MapUuidStorageTest extends AbstractStorageTest {
 
-    protected MapUuidStorageTest() {
+    public MapUuidStorageTest() {
         super(new MapUuidStorage());
     }
 }

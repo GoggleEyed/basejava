@@ -1,8 +1,8 @@
 package com.goggleeyed.webapp.storage;
 
-class ArrayStorageTest extends AbstractArrayStorageTest {
+public class ArrayStorageTest extends AbstractArrayStorageTest {
 
-    protected ArrayStorageTest() {
+    public ArrayStorageTest() {
         super(new ArrayStorage());
     }
 }
