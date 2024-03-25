@@ -4,9 +4,6 @@ import com.goggleeyed.webapp.exception.ExistStorageException;
 import com.goggleeyed.webapp.exception.NotExistStorageException;
 import com.goggleeyed.webapp.model.Resume;
 
-/**
- * Array based storage for Resumes
- */
 public abstract class AbstractStorage implements Storage {
 
     @Override
