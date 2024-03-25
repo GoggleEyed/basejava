@@ -3,6 +3,7 @@ package com.goggleeyed.webapp.storage;
 import com.goggleeyed.webapp.model.Resume;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ListStorage extends AbstractStorage {
@@ -17,12 +18,6 @@ public class ListStorage extends AbstractStorage {
     public void clear() {
         storage.clear();
     }
-
-    @Override
-    public Resume[] getAll() {
-        return storage.toArray(new Resume[0]);
-    }
-
 
     @Override
     protected Integer getSearchKey(String uuid) {
@@ -52,6 +47,11 @@ public class ListStorage extends AbstractStorage {
     @Override
     protected Resume doGet(Object searchKey) {
         return storage.get((Integer) searchKey);
+    }
+
+    @Override
+    protected Collection<Resume> doGetAll() {
+        return storage;
     }
 
     @Override

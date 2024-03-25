@@ -4,6 +4,11 @@ import com.goggleeyed.webapp.exception.ExistStorageException;
 import com.goggleeyed.webapp.exception.NotExistStorageException;
 import com.goggleeyed.webapp.model.Resume;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+
 public abstract class AbstractStorage implements Storage {
 
     @Override
@@ -30,6 +35,12 @@ public abstract class AbstractStorage implements Storage {
         return doGet(searchKey);
     }
 
+    @Override
+    public List<Resume> getAllSorted() {
+        List<Resume> resumes = new ArrayList<>(doGetAll());
+        resumes.sort(Comparator.comparing(Resume::getFullName));
+        return resumes;
+    }
 
     protected abstract Object getSearchKey(String uuid);
 
@@ -40,6 +51,8 @@ public abstract class AbstractStorage implements Storage {
     protected abstract void doUpdate(Resume r, Object searchKey);
 
     protected abstract Resume doGet(Object searchKey);
+
+    protected abstract Collection<Resume> doGetAll();
 
     protected abstract boolean isExist(Object searchKey);
 

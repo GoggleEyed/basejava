@@ -4,6 +4,7 @@ import com.goggleeyed.webapp.exception.StorageException;
 import com.goggleeyed.webapp.model.Resume;
 
 import java.util.Arrays;
+import java.util.Collection;
 
 /**
  * Array based storage for Resumes
@@ -22,11 +23,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
-    }
-
-    @Override
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
     }
 
     @Override
@@ -53,6 +49,11 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     @Override
     protected Resume doGet(Object searchKey) {
         return storage[(Integer) searchKey];
+    }
+
+    @Override
+    protected Collection<Resume> doGetAll() {
+        return Arrays.asList(Arrays.copyOf(storage, size));
     }
 
     @Override
