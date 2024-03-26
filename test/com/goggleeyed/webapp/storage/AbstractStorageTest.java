@@ -80,7 +80,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void updateNotExist() {
-        Assertions.assertThrows(NotExistStorageException.class, () -> storage.update(new Resume("dummy")));
+        Assertions.assertThrows(NotExistStorageException.class, () -> storage.update(new Resume("dummy", "dummy")));
     }
 
     @Test
