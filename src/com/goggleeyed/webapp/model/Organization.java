@@ -8,40 +8,39 @@ public class Organization {
 
     private final List<Position> positions;
 
-    public Organization(String name, String url, Position position) {
-        this.homePage = new Link(name, url);
-        this.positions = new ArrayList<>(Collections.singletonList(position));
+    public Organization(String name, String url, Position... positions) {
+        this(new Link(name, url), Arrays.asList(positions));
     }
 
-    public Organization(String name, String url, List<Position> positions) {
-        this.homePage = new Link(name, url);
+    public Organization(Link homePage, List<Position> positions) {
+        this.homePage = homePage;
         this.positions = new ArrayList<>(positions);
+    }
+
+    public Link getHomePage() {
+        return homePage;
+    }
+
+    public List<Position> getPositions() {
+        return positions;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Organization that = (Organization) o;
-
-        if (!homePage.equals(that.homePage)) return false;
-        return positions.equals(that.positions);
+        return Objects.equals(homePage, that.homePage) && Objects.equals(positions, that.positions);
     }
 
     @Override
     public int hashCode() {
-        int result = homePage.hashCode();
-        result = 31 * result + positions.hashCode();
-        return result;
+        return Objects.hash(homePage, positions);
     }
 
     @Override
     public String toString() {
-        return "Organization{" +
-                "homePage=" + homePage +
-                ", positions=" + positions +
-                '}';
+        return "Organization(" + homePage + "," + positions + ')';
     }
 
     public static class Position {
@@ -60,36 +59,41 @@ public class Organization {
             this.description = description;
         }
 
+        public LocalDate getStartDate() {
+            return startDate;
+        }
+
+        public LocalDate getEndDate() {
+            return endDate;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-
             Position position = (Position) o;
-
-            if (!startDate.equals(position.startDate)) return false;
-            if (!endDate.equals(position.endDate)) return false;
-            if (!title.equals(position.title)) return false;
-            return Objects.equals(description, position.description);
+            return Objects.equals(startDate, position.startDate) &&
+                    Objects.equals(endDate, position.endDate) &&
+                    Objects.equals(title, position.title) &&
+                    Objects.equals(description, position.description);
         }
 
         @Override
         public int hashCode() {
-            int result = startDate.hashCode();
-            result = 31 * result + endDate.hashCode();
-            result = 31 * result + title.hashCode();
-            result = 31 * result + (description != null ? description.hashCode() : 0);
-            return result;
+            return Objects.hash(startDate, endDate, title, description);
         }
 
         @Override
         public String toString() {
-            return "Position{" +
-                    "startDate=" + startDate +
-                    ", endDate=" + endDate +
-                    ", title='" + title + '\'' +
-                    ", description='" + description + '\'' +
-                    '}';
+            return "Position(" + startDate + ',' + endDate + ',' + title + ',' + description + ')';
         }
     }
 }

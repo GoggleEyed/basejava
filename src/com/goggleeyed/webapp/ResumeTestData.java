@@ -33,60 +33,60 @@ public class ResumeTestData {
 
         Section experience = new OrganizationSection(
                 Arrays.asList(
-                        new Organization("name1", "url1", Arrays.asList(
+                        new Organization("name1", "url1",
                                 new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
                                         "title1", "desc1"),
                                 new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
                                         "title2", "desc2"),
                                 new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
                                         "title3", "desc3")
-                        )),
-                        new Organization("name2", "url2", Arrays.asList(
+                        ),
+                        new Organization("name2", "url2",
                                 new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
                                         "title1", "desc1"),
                                 new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
                                         "title2", "desc2"),
                                 new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
                                         "title3", "desc3")
-                        )),
-                        new Organization("name3", "url3", Arrays.asList(
+                        ),
+                        new Organization("name3", "url3",
                                 new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
                                         "title1", "desc1"),
                                 new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
                                         "title2", "desc2"),
                                 new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
                                         "title3", "desc3")
-                        ))
+                        )
                 )
         );
         resume.setSection(SectionType.EXPERIENCE, experience);
 
         Section education = new OrganizationSection(
                 Arrays.asList(
-                        new Organization("name1", "url1", Arrays.asList(
+                        new Organization("name1", "url1",
                                 new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
                                         "title1", "desc1"),
                                 new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
                                         "title2", "desc2"),
                                 new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
                                         "title3", "desc3")
-                        )),
-                        new Organization("name2", "url2", Arrays.asList(
+                        ),
+                        new Organization("name2", "url2",
                                 new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
                                         "title1", "desc1"),
                                 new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
                                         "title2", "desc2"),
                                 new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
                                         "title3", "desc3")
-                        )),
-                        new Organization("name3", "url3", Arrays.asList(
+                        ),
+                        new Organization("name3", "url3",
                                 new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
                                         "title1", "desc1"),
                                 new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
                                         "title2", "desc2"),
                                 new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
                                         "title3", "desc3")
-                        ))
+                        )
                 )
         );
         resume.setSection(SectionType.EDUCATION, education);
