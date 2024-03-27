@@ -2,10 +2,98 @@ package com.goggleeyed.webapp;
 
 import com.goggleeyed.webapp.model.*;
 
+import com.goggleeyed.webapp.util.DateUtil;
+
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Arrays;
 
 public class ResumeTestData {
+
+    public static Resume of(String uuid, String fullName) {
+        Resume resume = new Resume(uuid, fullName);
+
+        resume.setContact(ContactType.PHONE, "phone number");
+        resume.setContact(ContactType.SKYPE, "skype");
+        resume.setContact(ContactType.MAIL, "mail");
+        resume.setContact(ContactType.LINKEDIN, "linkedin");
+        resume.setContact(ContactType.GITHUB, "github");
+        resume.setContact(ContactType.STACKOVERFLOW, "stackoverflow");
+        resume.setContact(ContactType.HOME_PAGE, "home_page");
+
+        resume.setSection(SectionType.PERSONAL, new TextSection("personal"));
+
+        resume.setSection(SectionType.OBJECTIVE, new TextSection("objective"));
+
+        resume.setSection(SectionType.ACHIEVEMENT, new ListSection(Arrays.asList("achievement1", "achievement2",
+                "achievement3")));
+
+        resume.setSection(SectionType.QUALIFICATIONS, new ListSection(Arrays.asList("qualification1", "qualification2",
+                "qualification3")));
+
+        Section experience = new OrganizationSection(
+                Arrays.asList(
+                        new Organization("name1", "url1", Arrays.asList(
+                                new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
+                                        "title1", "desc1"),
+                                new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
+                                        "title2", "desc2"),
+                                new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
+                                        "title3", "desc3")
+                        )),
+                        new Organization("name2", "url2", Arrays.asList(
+                                new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
+                                        "title1", "desc1"),
+                                new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
+                                        "title2", "desc2"),
+                                new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
+                                        "title3", "desc3")
+                        )),
+                        new Organization("name3", "url3", Arrays.asList(
+                                new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
+                                        "title1", "desc1"),
+                                new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
+                                        "title2", "desc2"),
+                                new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
+                                        "title3", "desc3")
+                        ))
+                )
+        );
+        resume.setSection(SectionType.EXPERIENCE, experience);
+
+        Section education = new OrganizationSection(
+                Arrays.asList(
+                        new Organization("name1", "url1", Arrays.asList(
+                                new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
+                                        "title1", "desc1"),
+                                new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
+                                        "title2", "desc2"),
+                                new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
+                                        "title3", "desc3")
+                        )),
+                        new Organization("name2", "url2", Arrays.asList(
+                                new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
+                                        "title1", "desc1"),
+                                new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
+                                        "title2", "desc2"),
+                                new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
+                                        "title3", "desc3")
+                        )),
+                        new Organization("name3", "url3", Arrays.asList(
+                                new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
+                                        "title1", "desc1"),
+                                new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
+                                        "title2", "desc2"),
+                                new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
+                                        "title3", "desc3")
+                        ))
+                )
+        );
+        resume.setSection(SectionType.EDUCATION, education);
+
+        return resume;
+    }
+
     public static void main(String[] args) {
         Resume resume = new Resume("Григорий Кислин");
 
@@ -52,15 +140,15 @@ public class ResumeTestData {
 
         Section experience = new OrganizationSection(Arrays.asList(
                 new Organization("Java Online Projects", "http://javaops.ru/",
-                        new Organization.Position(LocalDate.of(2013, 10, 1), LocalDate.now(),
+                        new Organization.Position(DateUtil.of(2013, Month.of(10)), LocalDate.now(),
                                 "Автор проекта.", "Создание, организация и проведение Java онлайн проектов и стажировок.")),
                 new Organization("Wrike", "https://www.wrike.com/",
-                        new Organization.Position(LocalDate.of(2014, 10, 1), LocalDate.of(2016, 1, 1),
+                        new Organization.Position(DateUtil.of(2014, Month.of(10)), DateUtil.of(2016, Month.of(1)),
                                 "Старший разработчик (backend)", "Проектирование и разработка онлайн платформы " +
                                 "управления проектами Wrike (Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, " +
                                 "Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO.")),
                 new Organization("RIT Center", "",
-                        new Organization.Position(LocalDate.of(2012, 4, 1), LocalDate.of(2014, 10, 1),
+                        new Organization.Position(DateUtil.of(2012, Month.of(4)), DateUtil.of(2014, Month.of(10)),
                                 "Java архитектор", "Организация процесса разработки системы ERP для разных " +
                                 "окружений: релизная политика, версионирование, ведение CI (Jenkins), миграция базы (кастомизация " +
                                 "Flyway), конфигурирование системы (pgBoucer, Nginx), AAA via SSO. Архитектура БД и серверной " +
@@ -74,11 +162,11 @@ public class ResumeTestData {
 
         Section education = new OrganizationSection(Arrays.asList(
                 new Organization("Coursera", "https://www.coursera.org/course/progfun",
-                        new Organization.Position(LocalDate.of(2013, 3, 1), LocalDate.of(2013, 5, 1),
-                                "", "'Functional Programming Principles in Scala' by Martin Odersky")),
+                        new Organization.Position(DateUtil.of(2013, Month.of(3)), DateUtil.of(2013, Month.of(5)),
+                                "'Functional Programming Principles in Scala' by Martin Odersky", null)),
                 new Organization("Luxoft", "http://www.luxoft-training.ru/training/catalog/course.html?ID=22366",
-                        new Organization.Position(LocalDate.of(2011, 3, 1), LocalDate.of(2011, 4, 1),
-                                "", "Курс 'Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.'"))
+                        new Organization.Position(DateUtil.of(2011, Month.of(3)), DateUtil.of(2011, Month.of(4)),
+                                "Курс 'Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.'", ""))
         ));
         resume.setSection(SectionType.EDUCATION, education);
 

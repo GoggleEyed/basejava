@@ -1,5 +1,6 @@
 package com.goggleeyed.webapp.storage;
 
+import com.goggleeyed.webapp.ResumeTestData;
 import com.goggleeyed.webapp.exception.ExistStorageException;
 import com.goggleeyed.webapp.exception.NotExistStorageException;
 import com.goggleeyed.webapp.model.Resume;
@@ -15,13 +16,13 @@ public abstract class AbstractStorageTest {
 
     private static final String UUID_1 = "uuid1";
     private static final String FULL_NAME_1 = "name1";
-    private static final Resume RESUME_1 = new Resume(UUID_1, FULL_NAME_1);
+    private static final Resume RESUME_1 = ResumeTestData.of(UUID_1, FULL_NAME_1);
     private static final String UUID_2 = "uuid2";
     private static final String FULL_NAME_2 = "name2";
-    private static final Resume RESUME_2 = new Resume(UUID_2, FULL_NAME_2);
+    private static final Resume RESUME_2 = ResumeTestData.of(UUID_2, FULL_NAME_2);
     private static final String UUID_3 = "uuid3";
     private static final String FULL_NAME_3 = "name3";
-    private static final Resume RESUME_3 = new Resume(UUID_3, FULL_NAME_3);
+    private static final Resume RESUME_3 = ResumeTestData.of(UUID_3, FULL_NAME_3);
 
     protected AbstractStorageTest(Storage storage) {
         this.storage = storage;
@@ -48,7 +49,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void save() {
-        Resume resume_4 = new Resume("uuid4", "name4");
+        Resume resume_4 = ResumeTestData.of("uuid4", "name4");
         storage.save(resume_4);
         assertSize(4);
         assertGet(resume_4);
@@ -56,7 +57,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void saveExist() {
-        Assertions.assertThrows(ExistStorageException.class, () -> storage.save(new Resume(UUID_1, "dummy")));
+        Assertions.assertThrows(ExistStorageException.class, () -> storage.save(ResumeTestData.of(UUID_1, "dummy")));
     }
 
     @Test
@@ -73,14 +74,14 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void update() {
-        Resume new_resume_1 = new Resume(UUID_1, "new name");
+        Resume new_resume_1 = ResumeTestData.of(UUID_1, "new name");
         storage.update(new_resume_1);
         assertGet(new_resume_1);
     }
 
     @Test
     public void updateNotExist() {
-        Assertions.assertThrows(NotExistStorageException.class, () -> storage.update(new Resume("dummy", "dummy")));
+        Assertions.assertThrows(NotExistStorageException.class, () -> storage.update(ResumeTestData.of("dummy", "dummy")));
     }
 
     @Test
