@@ -52,33 +52,33 @@ public class ResumeTestData {
 
         Section experience = new OrganizationSection(Arrays.asList(
                 new Organization("Java Online Projects", "http://javaops.ru/",
-                        LocalDate.of(2013, 10, 1), LocalDate.now(),
-                        "Автор проекта.", "Создание, организация и проведение Java онлайн проектов и стажировок."),
+                        new Organization.Position(LocalDate.of(2013, 10, 1), LocalDate.now(),
+                                "Автор проекта.", "Создание, организация и проведение Java онлайн проектов и стажировок.")),
                 new Organization("Wrike", "https://www.wrike.com/",
-                        LocalDate.of(2014, 10, 1), LocalDate.of(2016, 1, 1),
-                        "Старший разработчик (backend)", "Проектирование и разработка онлайн платформы " +
-                        "управления проектами Wrike (Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, " +
-                        "Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO."),
+                        new Organization.Position(LocalDate.of(2014, 10, 1), LocalDate.of(2016, 1, 1),
+                                "Старший разработчик (backend)", "Проектирование и разработка онлайн платформы " +
+                                "управления проектами Wrike (Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, " +
+                                "Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO.")),
                 new Organization("RIT Center", "",
-                        LocalDate.of(2012, 4, 1), LocalDate.of(2014, 10, 1),
-                        "Java архитектор", "Организация процесса разработки системы ERP для разных " +
-                        "окружений: релизная политика, версионирование, ведение CI (Jenkins), миграция базы (кастомизация " +
-                        "Flyway), конфигурирование системы (pgBoucer, Nginx), AAA via SSO. Архитектура БД и серверной " +
-                        "части системы. Разработка интергационных сервисов: CMIS, BPMN2, 1C (WebServices), сервисов " +
-                        "общего назначения (почта, экспорт в pdf, doc, html). Интеграция Alfresco JLAN для online " +
-                        "редактирование из браузера документов MS Office. Maven + plugin development, Ant, Apache " +
-                        "Commons, Spring security, Spring MVC, Tomcat,WSO2, xcmis, OpenCmis, Bonita, Python scripting, " +
-                        "Unix shell remote scripting via ssh tunnels, PL/Python")
+                        new Organization.Position(LocalDate.of(2012, 4, 1), LocalDate.of(2014, 10, 1),
+                                "Java архитектор", "Организация процесса разработки системы ERP для разных " +
+                                "окружений: релизная политика, версионирование, ведение CI (Jenkins), миграция базы (кастомизация " +
+                                "Flyway), конфигурирование системы (pgBoucer, Nginx), AAA via SSO. Архитектура БД и серверной " +
+                                "части системы. Разработка интергационных сервисов: CMIS, BPMN2, 1C (WebServices), сервисов " +
+                                "общего назначения (почта, экспорт в pdf, doc, html). Интеграция Alfresco JLAN для online " +
+                                "редактирование из браузера документов MS Office. Maven + plugin development, Ant, Apache " +
+                                "Commons, Spring security, Spring MVC, Tomcat,WSO2, xcmis, OpenCmis, Bonita, Python scripting, " +
+                                "Unix shell remote scripting via ssh tunnels, PL/Python"))
         ));
         resume.setSection(SectionType.EXPERIENCE, experience);
 
         Section education = new OrganizationSection(Arrays.asList(
                 new Organization("Coursera", "https://www.coursera.org/course/progfun",
-                        LocalDate.of(2013, 3, 1), LocalDate.of(2013, 5, 1),
-                        "", "'Functional Programming Principles in Scala' by Martin Odersky"),
+                        new Organization.Position(LocalDate.of(2013, 3, 1), LocalDate.of(2013, 5, 1),
+                                "", "'Functional Programming Principles in Scala' by Martin Odersky")),
                 new Organization("Luxoft", "http://www.luxoft-training.ru/training/catalog/course.html?ID=22366",
-                        LocalDate.of(2011, 3, 1), LocalDate.of(2011, 4, 1),
-                        "", "Курс 'Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.'")
+                        new Organization.Position(LocalDate.of(2011, 3, 1), LocalDate.of(2011, 4, 1),
+                                "", "Курс 'Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.'"))
         ));
         resume.setSection(SectionType.EDUCATION, education);
 
