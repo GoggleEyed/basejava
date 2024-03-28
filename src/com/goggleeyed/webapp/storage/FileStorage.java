@@ -2,6 +2,7 @@ package com.goggleeyed.webapp.storage;
 
 import com.goggleeyed.webapp.exception.StorageException;
 import com.goggleeyed.webapp.model.Resume;
+import com.goggleeyed.webapp.storage.serialization.StreamSerializer;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -10,11 +11,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class AbstractFileStorage extends AbstractStorage<File> {
-
+public class FileStorage extends AbstractStorage<File> {
     private final File directory;
+    private final StreamSerializer streamSerializer;
 
-    protected AbstractFileStorage(File directory) {
+    protected FileStorage(File directory, StreamSerializer streamSerializer) {
         Objects.requireNonNull(directory, "directory must not be null");
         if (!directory.isDirectory()) {
             throw new IllegalArgumentException(directory.getAbsolutePath() + " is not directory");
@@ -22,7 +23,9 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         if (!directory.canRead() || !directory.canWrite()) {
             throw new IllegalArgumentException(directory.getAbsolutePath() + " is not readable/writable");
         }
+        Objects.requireNonNull(streamSerializer, "streamSerializer must not be null");
         this.directory = directory;
+        this.streamSerializer = streamSerializer;
     }
 
     @Override
@@ -50,7 +53,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected void doUpdate(Resume r, File file) {
         try {
-            doWrite(r, new BufferedOutputStream(Files.newOutputStream(file.toPath())));
+            streamSerializer.doWrite(r, new BufferedOutputStream(Files.newOutputStream(file.toPath())));
         } catch (IOException e) {
             throw new StorageException("IO error", file.getName(), e);
         }
@@ -59,7 +62,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected Resume doGet(File file) {
         try {
-            return doRead(new BufferedInputStream(Files.newInputStream(file.toPath())));
+            return streamSerializer.doRead(new BufferedInputStream(Files.newInputStream(file.toPath())));
         } catch (IOException e) {
             throw new StorageException("IO error", file.getName(), e);
         }
@@ -101,8 +104,4 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
             }
         }
     }
-
-    protected abstract void doWrite(Resume r, OutputStream os) throws IOException;
-
-    protected abstract Resume doRead(InputStream is) throws IOException;
 }
