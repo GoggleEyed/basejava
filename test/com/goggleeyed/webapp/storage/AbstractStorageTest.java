@@ -8,9 +8,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.util.Arrays;
 
 public abstract class AbstractStorageTest {
+
+    protected static final File STORAGE_DIR = new File("./storage");
 
     protected final Storage storage;
 
