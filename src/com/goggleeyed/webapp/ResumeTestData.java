@@ -22,41 +22,34 @@ public class ResumeTestData {
         resume.setContact(ContactType.HOME_PAGE, "home_page");
 
         resume.setSection(SectionType.PERSONAL, new TextSection("personal"));
-
         resume.setSection(SectionType.OBJECTIVE, new TextSection("objective"));
-
-        resume.setSection(SectionType.ACHIEVEMENT, new ListSection(Arrays.asList("achievement1", "achievement2",
-                "achievement3")));
-
-        resume.setSection(SectionType.QUALIFICATIONS, new ListSection(Arrays.asList("qualification1", "qualification2",
-                "qualification3")));
+        resume.setSection(SectionType.ACHIEVEMENT, new ListSection("achievement1", "achievement2", "achievement3"));
+        resume.setSection(SectionType.QUALIFICATIONS, new ListSection("qualification1", "qualification2", "qualification3"));
 
         Section experience = new OrganizationSection(
-                Arrays.asList(
-                        new Organization("name1", "url1",
-                                new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
-                                        "title1", "desc1"),
-                                new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
-                                        "title2", "desc2"),
-                                new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
-                                        "title3", "desc3")
-                        ),
-                        new Organization("name2", "url2",
-                                new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
-                                        "title1", "desc1"),
-                                new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
-                                        "title2", "desc2"),
-                                new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
-                                        "title3", "desc3")
-                        ),
-                        new Organization("name3", "url3",
-                                new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
-                                        "title1", "desc1"),
-                                new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
-                                        "title2", "desc2"),
-                                new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
-                                        "title3", "desc3")
-                        )
+                new Organization("name1", "url1",
+                        new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
+                                "title1", "desc1"),
+                        new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
+                                "title2", "desc2"),
+                        new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
+                                "title3", "desc3")
+                ),
+                new Organization("name2", "url2",
+                        new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
+                                "title1", "desc1"),
+                        new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
+                                "title2", "desc2"),
+                        new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
+                                "title3", "desc3")
+                ),
+                new Organization("name3", "url3",
+                        new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
+                                "title1", "desc1"),
+                        new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
+                                "title2", "desc2"),
+                        new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
+                                "title3", "desc3")
                 )
         );
         resume.setSection(SectionType.EXPERIENCE, experience);
@@ -64,27 +57,27 @@ public class ResumeTestData {
         Section education = new OrganizationSection(
                 Arrays.asList(
                         new Organization("name1", "url1",
-                                new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
+                                new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
                                         "title1", "desc1"),
-                                new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
+                                new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
                                         "title2", "desc2"),
-                                new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
+                                new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
                                         "title3", "desc3")
                         ),
                         new Organization("name2", "url2",
-                                new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
+                                new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
                                         "title1", "desc1"),
-                                new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
+                                new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
                                         "title2", "desc2"),
-                                new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
+                                new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
                                         "title3", "desc3")
                         ),
                         new Organization("name3", "url3",
-                                new Organization.Position(DateUtil.of(2000, Month.of(1)), DateUtil.of(2001, Month.of(2)),
+                                new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
                                         "title1", "desc1"),
-                                new Organization.Position(DateUtil.of(2001, Month.of(2)), DateUtil.of(2002, Month.of(3)),
+                                new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
                                         "title2", "desc2"),
-                                new Organization.Position(DateUtil.of(2002, Month.of(3)), DateUtil.of(2003, Month.of(4)),
+                                new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
                                         "title3", "desc3")
                         )
                 )

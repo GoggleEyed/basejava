@@ -2,7 +2,14 @@ package com.goggleeyed.webapp.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.*;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
+import static com.goggleeyed.webapp.util.DateUtil.NOW;
+import static com.goggleeyed.webapp.util.DateUtil.of;
 
 public class Organization implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -51,6 +58,15 @@ public class Organization implements Serializable {
         private final LocalDate endDate;
         private final String title;
         private final String description;
+
+
+        public Position(int startYear, Month startMonth, String title, String description) {
+            this(of(startYear, startMonth), NOW, title, description);
+        }
+
+        public Position(int startYear, Month startMonth, int endYear, Month endMonth, String title, String description) {
+            this(of(startYear, startMonth), of(endYear, endMonth), title, description);
+        }
 
         public Position(LocalDate startDate, LocalDate endDate, String title, String description) {
             Objects.requireNonNull(startDate, "startDate must not be null");
