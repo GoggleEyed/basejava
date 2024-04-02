@@ -77,9 +77,9 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void update() {
-        Resume new_resume_1 = ResumeTestData.of(UUID_1, "new name");
-        storage.update(new_resume_1);
-        assertGet(new_resume_1);
+        Resume newResume = ResumeTestData.of(UUID_1, "new name");
+        storage.update(newResume);
+        assertGet(newResume);
     }
 
     @Test
