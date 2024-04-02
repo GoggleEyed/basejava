@@ -1,4 +1,4 @@
-package com.goggleeyed.webapp.storage.serialization;
+package com.goggleeyed.webapp.storage.serializer;
 
 import com.goggleeyed.webapp.model.Resume;
 

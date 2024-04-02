@@ -2,7 +2,7 @@ package com.goggleeyed.webapp.storage;
 
 import com.goggleeyed.webapp.exception.StorageException;
 import com.goggleeyed.webapp.model.Resume;
-import com.goggleeyed.webapp.storage.serialization.StreamSerializer;
+import com.goggleeyed.webapp.storage.serializer.StreamSerializer;
 
 import java.io.*;
 import java.nio.file.Files;

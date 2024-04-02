@@ -1,6 +1,6 @@
 package com.goggleeyed.webapp.storage;
 
-import com.goggleeyed.webapp.storage.serialization.ObjectStreamSerializer;
+import com.goggleeyed.webapp.storage.serializer.ObjectStreamSerializer;
 
 public class ObjectFileStorageTest extends AbstractStorageTest {
 
