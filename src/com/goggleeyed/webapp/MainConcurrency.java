@@ -6,7 +6,7 @@ import java.util.List;
 public class MainConcurrency {
     public static final int THREADS_NUMBER = 10000;
     private int counter;
-    private static final Object LOCK = new Object();
+    private final Object lock = new Object();
 
     public static void main(String[] args) throws InterruptedException {
         System.out.println(Thread.currentThread().getName());
@@ -58,6 +58,43 @@ public class MainConcurrency {
             }
         });
         System.out.println(mainConcurrency.counter);
+
+        new Thread(mainConcurrency::method1).start();
+        new Thread(mainConcurrency::method2).start();
+
+    }
+
+    private final Object lock1 = new Object();
+    private final Object lock2 = new Object();
+
+    private void method1() {
+        synchronized (lock1) {
+            System.out.println("Start 1");
+            try {
+                lock1.wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            synchronized (lock2) {
+                System.out.println("End 1");
+                lock2.notify();
+            }
+        }
+    }
+
+    private void method2() {
+        synchronized (lock2) {
+            System.out.println("Start 2");
+            try {
+                lock2.wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            synchronized (lock1) {
+                System.out.println("End 2");
+                lock1.notify();
+            }
+        }
     }
 
     private synchronized void inc() {
