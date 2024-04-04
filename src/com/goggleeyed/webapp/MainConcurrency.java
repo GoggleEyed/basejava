@@ -59,42 +59,28 @@ public class MainConcurrency {
         });
         System.out.println(mainConcurrency.counter);
 
-        new Thread(mainConcurrency::method1).start();
-        new Thread(mainConcurrency::method2).start();
-
+        final String lock1 = "lock1";
+        final String lock2 = "lock2";
+        deadLock(lock1, lock2);
+        deadLock(lock2, lock1);
     }
 
-    private final Object lock1 = new Object();
-    private final Object lock2 = new Object();
-
-    private void method1() {
-        synchronized (lock1) {
-            System.out.println("Start 1");
-            try {
-                lock1.wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            synchronized (lock2) {
-                System.out.println("End 1");
-                lock2.notify();
-            }
-        }
-    }
-
-    private void method2() {
-        synchronized (lock2) {
-            System.out.println("Start 2");
-            try {
-                lock2.wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+    private static void deadLock(Object lock1, Object lock2) {
+        new Thread(() -> {
+            System.out.println("Waiting " + lock1);
             synchronized (lock1) {
-                System.out.println("End 2");
-                lock1.notify();
+                System.out.println("Holding " + lock1);
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Waiting " + lock2);
+                synchronized (lock2) {
+                    System.out.println("Holding " + lock2);
+                }
             }
-        }
+        }).start();
     }
 
     private synchronized void inc() {
