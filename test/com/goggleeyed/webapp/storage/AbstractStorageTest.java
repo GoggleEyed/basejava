@@ -1,5 +1,6 @@
 package com.goggleeyed.webapp.storage;
 
+import com.goggleeyed.webapp.Config;
 import com.goggleeyed.webapp.ResumeTestData;
 import com.goggleeyed.webapp.exception.ExistStorageException;
 import com.goggleeyed.webapp.exception.NotExistStorageException;
@@ -13,7 +14,7 @@ import java.util.Arrays;
 
 public abstract class AbstractStorageTest {
 
-    protected static final File STORAGE_DIR = new File("./storage");
+    protected static final File STORAGE_DIR = Config.get().getStorageDir();
 
     protected final Storage storage;
 
