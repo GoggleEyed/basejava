@@ -1,7 +1,6 @@
 package com.goggleeyed.webapp;
 
 import com.goggleeyed.webapp.model.*;
-
 import com.goggleeyed.webapp.util.DateUtil;
 
 import java.time.LocalDate;
@@ -13,13 +12,13 @@ public class ResumeTestData {
     public static Resume of(String uuid, String fullName) {
         Resume resume = new Resume(uuid, fullName);
 
-        resume.addContact(ContactType.PHONE, "phone number");
-        resume.addContact(ContactType.SKYPE, "skype");
-        resume.addContact(ContactType.MAIL, "mail");
-        resume.addContact(ContactType.LINKEDIN, "linkedin");
-        resume.addContact(ContactType.GITHUB, "github");
-        resume.addContact(ContactType.STACKOVERFLOW, "stackoverflow");
-        resume.addContact(ContactType.HOME_PAGE, "home_page");
+        resume.addContact(ContactType.PHONE, fullName + " phone number");
+        resume.addContact(ContactType.SKYPE, fullName + " skype");
+        resume.addContact(ContactType.MAIL, fullName + " mail");
+        resume.addContact(ContactType.LINKEDIN, fullName + " linkedin");
+        resume.addContact(ContactType.GITHUB, fullName + " github");
+        resume.addContact(ContactType.STACKOVERFLOW, fullName + " stackoverflow");
+        resume.addContact(ContactType.HOME_PAGE, fullName + " home_page");
 
 //        resume.addSection(SectionType.PERSONAL, new TextSection("personal"));
 //        resume.addSection(SectionType.OBJECTIVE, new TextSection("objective"));
