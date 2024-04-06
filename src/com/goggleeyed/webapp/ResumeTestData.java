@@ -13,76 +13,76 @@ public class ResumeTestData {
     public static Resume of(String uuid, String fullName) {
         Resume resume = new Resume(uuid, fullName);
 
-        resume.addContact(ContactType.PHONE, "phone number");
-        resume.addContact(ContactType.SKYPE, "skype");
-        resume.addContact(ContactType.MAIL, "mail");
-        resume.addContact(ContactType.LINKEDIN, "linkedin");
-        resume.addContact(ContactType.GITHUB, "github");
-        resume.addContact(ContactType.STACKOVERFLOW, "stackoverflow");
-        resume.addContact(ContactType.HOME_PAGE, "home_page");
-
-        resume.addSection(SectionType.PERSONAL, new TextSection("personal"));
-        resume.addSection(SectionType.OBJECTIVE, new TextSection("objective"));
-        resume.addSection(SectionType.ACHIEVEMENT, new ListSection("achievement1", "achievement2", "achievement3"));
-        resume.addSection(SectionType.QUALIFICATIONS, new ListSection("qualification1", "qualification2", "qualification3"));
-
-        Section experience = new OrganizationSection(
-                new Organization("name1", "url1",
-                        new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
-                                "title1", "desc1"),
-                        new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
-                                "title2", "desc2"),
-                        new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
-                                "title3", "desc3")
-                ),
-                new Organization("name2", "url2",
-                        new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
-                                "title1", "desc1"),
-                        new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
-                                "title2", "desc2"),
-                        new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
-                                "title3", "desc3")
-                ),
-                new Organization("name3", "url3",
-                        new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
-                                "title1", "desc1"),
-                        new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
-                                "title2", "desc2"),
-                        new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
-                                "title3", "desc3")
-                )
-        );
-        resume.addSection(SectionType.EXPERIENCE, experience);
-
-        Section education = new OrganizationSection(
-                Arrays.asList(
-                        new Organization("name1", "url1",
-                                new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
-                                        "title1", "desc1"),
-                                new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
-                                        "title2", "desc2"),
-                                new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
-                                        "title3", "desc3")
-                        ),
-                        new Organization("name2", "url2",
-                                new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
-                                        "title1", "desc1"),
-                                new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
-                                        "title2", "desc2"),
-                                new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
-                                        "title3", "desc3")
-                        ),
-                        new Organization("name3", "url3",
-                                new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
-                                        "title1", "desc1"),
-                                new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
-                                        "title2", "desc2"),
-                                new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
-                                        "title3", "desc3")
-                        )
-                )
-        );
-        resume.addSection(SectionType.EDUCATION, education);
+//        resume.addContact(ContactType.PHONE, "phone number");
+//        resume.addContact(ContactType.SKYPE, "skype");
+//        resume.addContact(ContactType.MAIL, "mail");
+//        resume.addContact(ContactType.LINKEDIN, "linkedin");
+//        resume.addContact(ContactType.GITHUB, "github");
+//        resume.addContact(ContactType.STACKOVERFLOW, "stackoverflow");
+//        resume.addContact(ContactType.HOME_PAGE, "home_page");
+//
+//        resume.addSection(SectionType.PERSONAL, new TextSection("personal"));
+//        resume.addSection(SectionType.OBJECTIVE, new TextSection("objective"));
+//        resume.addSection(SectionType.ACHIEVEMENT, new ListSection("achievement1", "achievement2", "achievement3"));
+//        resume.addSection(SectionType.QUALIFICATIONS, new ListSection("qualification1", "qualification2", "qualification3"));
+//
+//        Section experience = new OrganizationSection(
+//                new Organization("name1", "url1",
+//                        new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
+//                                "title1", "desc1"),
+//                        new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
+//                                "title2", "desc2"),
+//                        new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
+//                                "title3", "desc3")
+//                ),
+//                new Organization("name2", "url2",
+//                        new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
+//                                "title1", "desc1"),
+//                        new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
+//                                "title2", "desc2"),
+//                        new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
+//                                "title3", "desc3")
+//                ),
+//                new Organization("name3", "url3",
+//                        new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
+//                                "title1", "desc1"),
+//                        new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
+//                                "title2", "desc2"),
+//                        new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
+//                                "title3", "desc3")
+//                )
+//        );
+//        resume.addSection(SectionType.EXPERIENCE, experience);
+//
+//        Section education = new OrganizationSection(
+//                Arrays.asList(
+//                        new Organization("name1", "url1",
+//                                new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
+//                                        "title1", "desc1"),
+//                                new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
+//                                        "title2", "desc2"),
+//                                new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
+//                                        "title3", "desc3")
+//                        ),
+//                        new Organization("name2", "url2",
+//                                new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
+//                                        "title1", "desc1"),
+//                                new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
+//                                        "title2", "desc2"),
+//                                new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
+//                                        "title3", "desc3")
+//                        ),
+//                        new Organization("name3", "url3",
+//                                new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
+//                                        "title1", "desc1"),
+//                                new Organization.Position(2001, Month.of(2), 2002, Month.of(3),
+//                                        "title2", "desc2"),
+//                                new Organization.Position(2002, Month.of(3), 2003, Month.of(4),
+//                                        "title3", "desc3")
+//                        )
+//                )
+//        );
+//        resume.addSection(SectionType.EDUCATION, education);
 
         return resume;
     }

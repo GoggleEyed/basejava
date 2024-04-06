@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.UUID;
 
 public abstract class AbstractStorageTest {
 
@@ -18,15 +19,12 @@ public abstract class AbstractStorageTest {
 
     protected final Storage storage;
 
-    private static final String UUID_1 = "uuid1";
-    private static final String FULL_NAME_1 = "name1";
-    private static final Resume RESUME_1 = ResumeTestData.of(UUID_1, FULL_NAME_1);
-    private static final String UUID_2 = "uuid2";
-    private static final String FULL_NAME_2 = "name2";
-    private static final Resume RESUME_2 = ResumeTestData.of(UUID_2, FULL_NAME_2);
-    private static final String UUID_3 = "uuid3";
-    private static final String FULL_NAME_3 = "name3";
-    private static final Resume RESUME_3 = ResumeTestData.of(UUID_3, FULL_NAME_3);
+    private static final String UUID_1 = UUID.randomUUID().toString();
+    private static final Resume RESUME_1 = ResumeTestData.of(UUID_1, "name1");
+    private static final String UUID_2 = UUID.randomUUID().toString();
+    private static final Resume RESUME_2 = ResumeTestData.of(UUID_2, "name2");
+    private static final String UUID_3 = UUID.randomUUID().toString();
+    private static final Resume RESUME_3 = ResumeTestData.of(UUID_3, "name3");
 
     protected AbstractStorageTest(Storage storage) {
         this.storage = storage;
@@ -53,7 +51,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void save() {
-        Resume resume_4 = ResumeTestData.of("uuid4", "name4");
+        Resume resume_4 = ResumeTestData.of(UUID.randomUUID().toString(), "name4");
         storage.save(resume_4);
         assertSize(4);
         assertGet(resume_4);
