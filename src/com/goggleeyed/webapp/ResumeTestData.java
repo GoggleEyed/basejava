@@ -20,11 +20,11 @@ public class ResumeTestData {
         resume.addContact(ContactType.STACKOVERFLOW, fullName + " stackoverflow");
         resume.addContact(ContactType.HOME_PAGE, fullName + " home_page");
 
-//        resume.addSection(SectionType.PERSONAL, new TextSection("personal"));
-//        resume.addSection(SectionType.OBJECTIVE, new TextSection("objective"));
-//        resume.addSection(SectionType.ACHIEVEMENT, new ListSection("achievement1", "achievement2", "achievement3"));
-//        resume.addSection(SectionType.QUALIFICATIONS, new ListSection("qualification1", "qualification2", "qualification3"));
-//
+        resume.addSection(SectionType.PERSONAL, new TextSection("personal"));
+        resume.addSection(SectionType.OBJECTIVE, new TextSection("objective"));
+        resume.addSection(SectionType.ACHIEVEMENT, new ListSection("achievement1", "achievement2", "achievement3"));
+        resume.addSection(SectionType.QUALIFICATIONS, new ListSection("qualification1", "qualification2", "qualification3"));
+
 //        Section experience = new OrganizationSection(
 //                new Organization("name1", "url1",
 //                        new Organization.Position(2000, Month.of(1), 2001, Month.of(2),
