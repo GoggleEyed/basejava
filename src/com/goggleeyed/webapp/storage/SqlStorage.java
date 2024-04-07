@@ -3,6 +3,7 @@ package com.goggleeyed.webapp.storage;
 import com.goggleeyed.webapp.exception.NotExistStorageException;
 import com.goggleeyed.webapp.model.*;
 import com.goggleeyed.webapp.sql.SqlHelper;
+import com.goggleeyed.webapp.util.JsonParser;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -141,13 +142,6 @@ public class SqlStorage implements Storage {
         });
     }
 
-    private void deleteContacts(Connection conn, Resume r) throws SQLException {
-        try (PreparedStatement ps = conn.prepareStatement("DELETE FROM contact WHERE resume_uuid = ?")) {
-            ps.setString(1, r.getUuid());
-            ps.execute();
-        }
-    }
-
     private void insertContacts(Connection conn, Resume r) throws SQLException {
         try (PreparedStatement ps = conn.prepareStatement("INSERT INTO contact (resume_uuid, type, value) VALUES (?, ?, ?)")) {
             for (Map.Entry<ContactType, String> e : r.getContacts().entrySet()) {
@@ -160,6 +154,34 @@ public class SqlStorage implements Storage {
         }
     }
 
+    private void insertSections(Connection conn, Resume r) throws SQLException {
+        try (PreparedStatement ps = conn.prepareStatement("INSERT INTO section (resume_uuid, type, content) VALUES (?,?,?)")) {
+            for (Map.Entry<SectionType, Section> e : r.getSections().entrySet()) {
+                ps.setString(1, r.getUuid());
+                ps.setString(2, e.getKey().name());
+                Section section = e.getValue();
+                ps.setString(3, JsonParser.write(section, Section.class));
+                ps.addBatch();
+            }
+            ps.executeBatch();
+        }
+    }
+
+    private void deleteContacts(Connection conn, Resume r) throws SQLException {
+        deleteAttributes(conn, r, "DELETE  FROM contact WHERE resume_uuid=?");
+    }
+
+    private void deleteSections(Connection conn, Resume r) throws SQLException {
+        deleteAttributes(conn, r, "DELETE  FROM section WHERE resume_uuid=?");
+    }
+
+    private void deleteAttributes(Connection conn, Resume r, String sql) throws SQLException {
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, r.getUuid());
+            ps.execute();
+        }
+    }
+
     private void addContact(ResultSet rs, Resume r) throws SQLException {
         String value = rs.getString("value");
         if (value != null) {
@@ -167,58 +189,12 @@ public class SqlStorage implements Storage {
         }
     }
 
-    private void deleteSections(Connection conn, Resume r) throws SQLException {
-        try (PreparedStatement ps = conn.prepareStatement("DELETE FROM section WHERE resume_uuid = ?")) {
-            ps.setString(1, r.getUuid());
-            ps.execute();
-        }
-    }
-
-    private void insertSections(Connection conn, Resume r) throws SQLException {
-        try (PreparedStatement ps = conn.prepareStatement("INSERT INTO section (resume_uuid, type, content) VALUES (?, ?, ?)")) {
-            for (Map.Entry<SectionType, Section> e : r.getSections().entrySet()) {
-                SectionType type = e.getKey();
-                Section section = e.getValue();
-                switch (type) {
-                    case PERSONAL:
-                    case OBJECTIVE:
-                        ps.setString(3, ((TextSection) section).getContent());
-                        break;
-                    case ACHIEVEMENT:
-                    case QUALIFICATIONS:
-                        ps.setString(3, String.join("\n", ((ListSection) section).getItems()));
-                        break;
-                    case EXPERIENCE:
-                    case EDUCATION:
-                        continue;
-                }
-                ps.setString(1, r.getUuid());
-                ps.setString(2, type.name());
-                ps.addBatch();
-            }
-            ps.executeBatch();
-        }
-    }
 
     private void addSection(ResultSet rs, Resume r) throws SQLException {
         String content = rs.getString("content");
         if (content != null) {
             SectionType type = SectionType.valueOf(rs.getString("type"));
-            Section section = null;
-            switch (type) {
-                case PERSONAL:
-                case OBJECTIVE:
-                    section = new TextSection(content);
-                    break;
-                case ACHIEVEMENT:
-                case QUALIFICATIONS:
-                    section = new ListSection(content.split("\n"));
-                    break;
-                case EXPERIENCE:
-                case EDUCATION:
-                    return;
-            }
-            r.addSection(type, section);
+            r.addSection(type, JsonParser.read(content, Section.class));
         }
     }
 }

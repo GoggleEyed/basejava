@@ -11,20 +11,14 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.UUID;
+
+import static com.goggleeyed.webapp.ResumeTestData.*;
 
 public abstract class AbstractStorageTest {
 
     protected static final File STORAGE_DIR = Config.get().getStorageDir();
 
     protected final Storage storage;
-
-    private static final String UUID_1 = UUID.randomUUID().toString();
-    private static final Resume RESUME_1 = ResumeTestData.of(UUID_1, "name1");
-    private static final String UUID_2 = UUID.randomUUID().toString();
-    private static final Resume RESUME_2 = ResumeTestData.of(UUID_2, "name2");
-    private static final String UUID_3 = UUID.randomUUID().toString();
-    private static final Resume RESUME_3 = ResumeTestData.of(UUID_3, "name3");
 
     protected AbstractStorageTest(Storage storage) {
         this.storage = storage;
@@ -51,10 +45,9 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void save() {
-        Resume resume_4 = ResumeTestData.of(UUID.randomUUID().toString(), "name4");
-        storage.save(resume_4);
+        storage.save(RESUME_4);
         assertSize(4);
-        assertGet(resume_4);
+        assertGet(RESUME_4);
     }
 
     @Test
