@@ -2,7 +2,7 @@
 <%@ page import="com.goggleeyed.webapp.model.SectionType" %>
 <%@ page import="com.goggleeyed.webapp.model.ListSection" %>
 <%@ page import="com.goggleeyed.webapp.model.OrganizationSection" %>
-<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="com.goggleeyed.webapp.util.DateUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -10,104 +10,85 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="css/style.css">
     <jsp:useBean id="resume" type="com.goggleeyed.webapp.model.Resume" scope="request"/>
-    <title>Резюме ${resume.fullName}</title
+    <title>Резюме ${resume.fullName}</title>
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
 <section>
     <form method="post" action="resume" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="uuid" value="${resume.uuid}">
+        <h1>Имя:</h1>
         <dl>
-            <dt>Имя:</dt>
-            <dd><input type="text" name="fullName" size=50 value="${resume.fullName}"></dd>
+            <input type="text" name="fullName" size=55 value="${resume.fullName}">
         </dl>
-        <h3>Контакты:</h3>
+        <h2>Контакты:</h2>
         <c:forEach var="type" items="<%=ContactType.values()%>">
             <dl>
                 <dt>${type.title}</dt>
                 <dd><input type="text" name="${type.name()}" size=30 value="${resume.getContact(type)}"></dd>
             </dl>
         </c:forEach>
-        <h3>Секции:</h3>
+        <hr>
         <c:forEach var="type" items="<%=SectionType.values()%>">
-            <jsp:useBean id="type" type="com.goggleeyed.webapp.model.SectionType"/>
-            <c:set var="type_name" value="${type.name()}"/>
+            <c:set var="section" value="${resume.getSection(type)}"/>
+            <jsp:useBean id="section" type="com.goggleeyed.webapp.model.Section"/>
+            <h2><a>${type.title}</a></h2>
             <c:choose>
-                <c:when test="${type_name.equals('OBJECTIVE') || type_name.equals('PERSONAL')}">
-                    <dl>
-                        <dt>${type.title}</dt>
-                        <dd><input type="text" name="${type_name}" size=30 value="${resume.getSection(type).content}">
-                        </dd>
-                    </dl>
+                <c:when test="${type=='OBJECTIVE'}">
+                    <input type='text' name='${type}' size=75 value='<%=section%>'>
                 </c:when>
-                <c:when test="${type_name.equals('ACHIEVEMENT') || type_name.equals('QUALIFICATIONS')}">
-                    <dl>
-                        <dt>${type.title}</dt>
-                        <dd>
-                            <textarea name="${type_name}" rows="5" cols="30"
-                            ><%=String.join("\n", ((ListSection) resume.getSection(type)).getItems())%></textarea>
-                        </dd>
-                    </dl>
+                <c:when test="${type=='PERSONAL'}">
+                    <textarea name='${type}' cols=75 rows=5><%=section%></textarea>
                 </c:when>
-                <c:when test="${type_name.equals('EXPERIENCE') || type_name.equals('EDUCATION')}">
-                    <h4>${type.title}</h4>
-                    <c:forEach var="organization" varStatus="counter"
-                               items="<%=((OrganizationSection) resume.getSection(type)).getOrganizations()%>">
-                        <jsp:useBean id="organization" type="com.goggleeyed.webapp.model.Organization"/>
+                <c:when test="${type=='QUALIFICATIONS' || type=='ACHIEVEMENT'}">
+                    <textarea name='${type}' cols=75
+                              rows=5><%=String.join("\n", ((ListSection) section).getItems())%></textarea>
+                </c:when>
+                <c:when test="${type=='EXPERIENCE' || type=='EDUCATION'}">
+                    <c:forEach var="org" items="<%=((OrganizationSection) section).getOrganizations()%>"
+                               varStatus="counter">
                         <dl>
-                            <dt>Название</dt>
-                            <dd>
-                                <input type="text" name="${type_name}" size=30
-                                       value="${organization.homePage.name}">
-                            </dd>
+                            <dt>Название учереждения:</dt>
+                            <dd><input type="text" name='${type}' size=100 value="${org.homePage.name}"></dd>
                         </dl>
                         <dl>
-                            <dt>Ссылка</dt>
-                            <dd>
-                                <input type="text" name="${type_name}url" size=30
-                                       value="${organization.homePage.url}">
+                            <dt>Сайт учереждения:</dt>
+                            <dd><input type="text" name='${type}url' size=100 value="${org.homePage.url}"></dd>
                             </dd>
                         </dl>
-                        <button>Удалить</button>
-                        <hr>
-                        <section style="margin-left: 32px">
-                            <c:set var="organization_name" value="<%=type.name() + organization.getHomePage().getName()%>"/>
-                            <c:forEach var="position" items="${organization.positions}">
+                        <br>
+                        <div style="margin-left: 30px">
+                            <c:forEach var="pos" items="${org.positions}">
+                                <jsp:useBean id="pos" type="com.goggleeyed.webapp.model.Organization.Position"/>
                                 <dl>
-                                    <dt>Должность</dt>
-                                    <dd><input type="text" name="${type_name}${counter.index}title" size=26 value="${position.title}">
+                                    <dt>Начальная дата:</dt>
+                                    <dd>
+                                        <input type="text" name="${type}${counter.index}startDate" size=10
+                                               value="<%=DateUtil.format(pos.getStartDate())%>" placeholder="MM/yyyy">
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt>Начальная дата</dt>
-                                    <dd><input type="month" name="${type_name}${counter.index}startDate" size=26
-                                               value="${position.startDate.format(DateTimeFormatter.ofPattern("yyyy-MM"))}">
-                                    </dd>
+                                    <dt>Конечная дата:</dt>
+                                    <dd>
+                                        <input type="text" name="${type}${counter.index}endDate" size=10
+                                               value="<%=DateUtil.format(pos.getEndDate())%>" placeholder="MM/yyyy">
                                 </dl>
                                 <dl>
-                                    <dt>Конечная дата</dt>
-                                    <dd><input type="month" name="${type_name}${counter.index}endDate" size=26
-                                               value="${position.endDate.format(DateTimeFormatter.ofPattern("yyyy-MM"))}">
-                                    </dd>
+                                    <dt>Должность:</dt>
+                                    <dd><input type="text" name='${type}${counter.index}title' size=75
+                                               value="${pos.title}">
                                 </dl>
                                 <dl>
-                                    <dt>Описание</dt>
-                                    <dd><input type="text" name="${type_name}${counter.index}description" size=26
-                                               value="${position.description}">
-                                    </dd>
+                                    <dt>Описание:</dt>
+                                    <dd><textarea name="${type}${counter.index}description" rows=5
+                                                  cols=75>${pos.description}</textarea></dd>
                                 </dl>
-                                <button>Удалить</button>
-                                <hr>
                             </c:forEach>
-                            <button>Добавить</button>
-                        </section>
-                        <hr>
+                        </div>
                     </c:forEach>
-                    <button>Добавить</button>
                 </c:when>
             </c:choose>
         </c:forEach>
-        <hr>
         <button type="submit">Сохранить</button>
         <button type="reset" onclick="window.history.back()">Отменить</button>
     </form>

@@ -20,8 +20,10 @@ import static com.goggleeyed.webapp.util.DateUtil.of;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Organization implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Link homePage;
 
+    public static final Organization EMPTY = new Organization("", "", Position.EMPTY);
+
+    private Link homePage;
     private List<Position> positions;
 
     public Organization() {
@@ -64,6 +66,8 @@ public class Organization implements Serializable {
 
     @XmlAccessorType(XmlAccessType.FIELD)
     public static class Position implements Serializable {
+        public static final Position EMPTY = new Position();
+
         private static final long serialVersionUID = 1L;
         @XmlJavaTypeAdapter(LocalDateAdapter.class)
         private LocalDate startDate;
@@ -109,7 +113,7 @@ public class Organization implements Serializable {
             return description;
         }
 
-        public String getPeriod(){
+        public String getPeriod() {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
             return startDate.format(formatter) + " - " + endDate.format(formatter);
         }

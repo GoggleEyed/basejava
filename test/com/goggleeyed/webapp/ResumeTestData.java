@@ -20,18 +20,18 @@ public class ResumeTestData {
     public static Resume of(String uuid, String fullName) {
         Resume resume = new Resume(uuid, fullName);
 
-        resume.addContact(ContactType.PHONE, fullName + " phone number");
-        resume.addContact(ContactType.SKYPE, fullName + " skype");
-        resume.addContact(ContactType.MAIL, fullName + " mail");
-        resume.addContact(ContactType.LINKEDIN, fullName + " linkedin");
-        resume.addContact(ContactType.GITHUB, fullName + " github");
-        resume.addContact(ContactType.STACKOVERFLOW, fullName + " stackoverflow");
-        resume.addContact(ContactType.HOME_PAGE, fullName + " home_page");
+        resume.setContact(ContactType.PHONE, fullName + " phone number");
+        resume.setContact(ContactType.SKYPE, fullName + " skype");
+        resume.setContact(ContactType.MAIL, fullName + " mail");
+        resume.setContact(ContactType.LINKEDIN, fullName + " linkedin");
+        resume.setContact(ContactType.GITHUB, fullName + " github");
+        resume.setContact(ContactType.STACKOVERFLOW, fullName + " stackoverflow");
+        resume.setContact(ContactType.HOME_PAGE, fullName + " home_page");
 
-        resume.addSection(SectionType.PERSONAL, new TextSection("personal"));
-        resume.addSection(SectionType.OBJECTIVE, new TextSection("objective"));
-        resume.addSection(SectionType.ACHIEVEMENT, new ListSection("achievement1", "achievement2", "achievement3"));
-        resume.addSection(SectionType.QUALIFICATIONS, new ListSection("qualification1", "qualification2", "qualification3"));
+        resume.setSection(SectionType.PERSONAL, new TextSection("personal"));
+        resume.setSection(SectionType.OBJECTIVE, new TextSection("objective"));
+        resume.setSection(SectionType.ACHIEVEMENT, new ListSection("achievement1", "achievement2", "achievement3"));
+        resume.setSection(SectionType.QUALIFICATIONS, new ListSection("qualification1", "qualification2", "qualification3"));
 
         Section experience = new OrganizationSection(
                 new Organization("name1", "url1",
@@ -59,7 +59,7 @@ public class ResumeTestData {
                                 "title3", "desc3")
                 )
         );
-        resume.addSection(SectionType.EXPERIENCE, experience);
+        resume.setSection(SectionType.EXPERIENCE, experience);
 
         Section education = new OrganizationSection(
                 Arrays.asList(
@@ -89,7 +89,7 @@ public class ResumeTestData {
                         )
                 )
         );
-        resume.addSection(SectionType.EDUCATION, education);
+        resume.setSection(SectionType.EDUCATION, education);
 
         return resume;
     }
